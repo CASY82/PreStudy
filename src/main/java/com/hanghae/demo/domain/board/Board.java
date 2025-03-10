@@ -37,7 +37,7 @@ public class Board {
 		return this;
 	}
 	
-	// 선택한 게시글 저장
+	// 선택한 게시글 저장 / 업데이트
 	public void save(BoardDomainRepository repository) {
 		repository.save(this);
 	}

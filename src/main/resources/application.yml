@@ -1,0 +1,20 @@
+spring:
+  security:
+    user:
+      name: user
+      password: password
+  datasource:
+    url: jdbc:h2:mem:testdb  # 인메모리 H2 데이터베이스
+    driver-class-name: org.h2.Driver
+    username: sa  # 기본 사용자 이름
+    password:  # 기본 비밀번호는 비워둡니다.
+    hikari:
+      maximum-pool-size: 10  # HikariCP 최대 풀 사이즈 설정 (선택적)
+  h2:
+    console:
+      enabled: true  # H2 콘솔 활성화
+      path: /h2-console  # H2 콘솔 접근 경로
+  jpa:
+    hibernate:
+      ddl-auto: update  # 데이터베이스 스키마 자동 업데이트
+      show-sql: true  # 실행되는 SQL 쿼리를 보여줌

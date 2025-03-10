@@ -1,6 +1,6 @@
 package com.hanghae.demo.infrastructure.jpa.entity;
 
-import java.sql.Timestamp;
+import com.hanghae.demo.infrastructure.jpa.common.BaseEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,12 +8,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
-@Table(name = "user")
-public class UserEntity {
+@Table(name = "account")
+public class UserEntity extends BaseEntity {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,11 +32,4 @@ public class UserEntity {
 
     @Column(nullable = false)
     private String auth;
-
-    @Column(name = "created_at", nullable = false)
-    private Timestamp createdAt;
-
-    @Column(name = "updated_at", nullable = false)
-    private Timestamp updatedAt;
-
 }
