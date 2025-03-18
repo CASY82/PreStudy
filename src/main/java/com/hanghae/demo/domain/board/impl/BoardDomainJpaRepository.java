@@ -1,6 +1,8 @@
 package com.hanghae.demo.domain.board.impl;
 
+import java.time.ZoneOffset;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.util.Assert;
 
@@ -12,7 +14,9 @@ import com.hanghae.demo.infrastructure.jpa.entity.BoardEntity;
 import com.hanghae.demo.infrastructure.jpa.repository.BoardRepository;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RequiredArgsConstructor
 public class BoardDomainJpaRepository implements BoardDomainRepository {
 
@@ -50,8 +54,8 @@ public class BoardDomainJpaRepository implements BoardDomainRepository {
 		obj.setTitle(entity.getTitle());
 		obj.setContent(entity.getContent());
 		obj.setPassword(entity.getPassword());
-		obj.setCreatedAt(entity.getCreatedAt().toInstant());
-		obj.setUpdatedAt(entity.getUpdatedAt().toInstant());
+		obj.setCreatedAt(entity.getCreatedAt().toInstant(ZoneOffset.UTC));
+		obj.setUpdatedAt(entity.getUpdatedAt().toInstant(ZoneOffset.UTC));
 		
 		return obj;
 	}
@@ -61,7 +65,9 @@ public class BoardDomainJpaRepository implements BoardDomainRepository {
 		
 		Assert.notNull(obj, "Board 객체는 null일 수 없습니다.");
 	    
-	    entity.setId(obj.getId().getValue()); // BoardId에서 ID 값을 가져와 설정
+		if(!Objects.isNull(obj.getId())) {
+			entity.setId(obj.getId().getValue()); // BoardId에서 ID 값을 가져와 설정
+		}
 	    entity.setUserId(obj.getUserId().getValue()); // UserId에서 사용자 ID 값을 가져와 설정
 	    entity.setTitle(obj.getTitle());
 	    entity.setContent(obj.getContent());
